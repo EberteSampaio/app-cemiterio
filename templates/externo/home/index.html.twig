@@ -1,0 +1,488 @@
+{% extends 'base.html.twig' %}
+{% block title %} Memorial Jardim São Pedro - Paz e Dignidade {% endblock %}
+{% block stylesheets %}
+    <style>
+        .results-list{
+            margin-left: 300px;
+            margin-right: 300px;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero section" id="home">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+
+            <div class="hero-container container">
+                <div class="hero-content">
+                    <div class="hero-cross">✞</div>
+                    <h1 class="hero-title">Bem-vindos ao Memorial Jardim São Pedro </h1>
+                    <p class="hero-subtitle">Um lugar de paz, memória e dignidade para honrar aqueles que partiram</p>
+                    <p class="hero-description">
+                        Há mais de 35 anos cuidando com respeito e carinho da memória de seus entes queridos.
+                        Oferecemos um ambiente sereno e bem cuidado para que você possa prestar suas homenagens.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#search" class="btn btn-primary">Consultar Registros</a>
+                        <a href="#about" class="btn btn-secondary">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-scroll">
+                <a href="#about" class="scroll-link">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>Role para baixo</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about section" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Sobre Nós</h2>
+                    <p class="section-subtitle">Tradição e cuidado há mais de três décadas</p>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Nossa História</h3>
+                        <p>
+                            Desde a sua criação, o Parque Memorial Jardim São Pedro foi projetado para atender às necessidades da comunidade local.
+                            Ao longo dos anos, passou por melhorias significativas, como ampliação de áreas de circulação e modernização da sinalização interna.
+
+                        </p>
+                        <p>
+                            Portanto, tornou-se referência em Catalão, conciliando tradição funerária com estrutura contemporânea e organizada.
+                            Nosso compromisso é oferecer um ambiente sereno, bem cuidado e respeitoso,
+                            onde cada família possa encontrar conforto em momentos de saudade e reflexão.
+                        </p>
+
+                        <div class="about-features">
+                            <div class="feature">
+                                <i class="fas fa-leaf feature-icon"></i>
+                                <div class="feature-content">
+                                    <h4>Ambiente Natural</h4>
+                                    <p>Jardins bem cuidados e áreas verdes preservadas</p>
+                                </div>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-shield-alt feature-icon"></i>
+                                <div class="feature-content">
+                                    <h4>Segurança 24h</h4>
+                                    <p>Monitoramento constante e equipe de segurança</p>
+                                </div>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-heart feature-icon"></i>
+                                <div class="feature-content">
+                                    <h4>Atendimento Humanizado</h4>
+                                    <p>Equipe preparada para acolher com carinho</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search section" id="search">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Consultar Registros</h2>
+                    <p class="section-subtitle">Encontre informações sobre seus entes queridos</p>
+                </div>
+
+                <div class="search-content">
+                    <form class="search-form" id="search-form" >
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="search-name">Nome Completo</label>
+                                <input
+                                    type="text"
+                                    id="search-name"
+                                    name="nome_completo"
+                                    placeholder="Digite o nome completo"
+                                    required
+                                >
+                            </div>
+
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="reset" class="btn btn-secondary">Limpar</button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search"></i>
+                                Buscar</button>
+                        </div>
+                    </form>
+
+                    <div class="search-info">
+                        <div class="info-card">
+                            <i class="fas fa-info-circle"></i>
+                            <div class="info-content">
+                                <h4>Como usar a consulta</h4>
+                                <p>Preencha pelo menos o nome completo para realizar a busca. Os demais campos são opcionais e ajudam a refinar os resultados.</p>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <i class="fas fa-phone"></i>
+                            <div class="info-content">
+                                <h4>Precisa de ajuda?</h4>
+                                <p>Entre em contato conosco pelo telefone <strong>(11) 3456-7890</strong> ou visite nossa administração.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services section" id="services">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Nossos Serviços</h2>
+                    <p class="section-subtitle">Cuidado completo em todos os momentos</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-monument"></i>
+                        </div>
+                        <h3 class="service-title">Sepultamentos</h3>
+                        <p class="service-description">
+                            Realizamos sepultamentos com todo o respeito e dignidade que sua família merece.
+                        </p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="service-title">Manutenção</h3>
+                        <p class="service-description">
+                            Serviços de limpeza, conservação e manutenção de túmulos e jazigos.
+                        </p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <h3 class="service-title">Floricultura</h3>
+                        <p class="service-description">
+                            Arranjos florais e coroas para homenagear seus entes queridos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact section" id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Contato</h2>
+                    <p class="section-subtitle">Estamos aqui para ajudar você</p>
+                </div>
+
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Endereço</h4>
+                                <p>Rua Batista - Vila Wilson Guimaraes, Catalão - GO</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Telefones</h4>
+                                <p>Administração: (11) 3456-7890<br>Plantão 24h: (11) 9876-5432<br>WhatsApp: (11) 9876-5432</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Horário de Funcionamento</h4>
+                                <p>Segunda a Domingo: 7h às 17h<br>Plantão 24h para emergências<br>Feriados: 8h às 16h</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>E-mail</h4>
+                                <p>
+                                    exemplo-email-1@gmail.com
+                                    <br>
+                                    exemplo-email-2@gmail.com
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+{% block javascripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function (){
+        const searchForm = document.getElementById('search-form');
+
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleSearchSubmit();
+        });
+
+        searchForm.addEventListener('reset', function() {
+            clearSearchResults();
+            showSearchInfo('Formulário limpo. Digite novos critérios de busca.');
+        });
+
+        function handleSearchSubmit() {
+            const formData = new FormData(searchForm);
+            const searchData = {
+                nome_completo: formData.get('nome_completo')?.trim(),
+            };
+
+            // Validação básica
+            if (!searchData.nome_completo) {
+                showSearchError('Por favor, digite pelo menos o nome para realizar a busca.');
+                return;
+            }
+
+            if (searchData.nome_completo.length < 2) {
+                showSearchError('Nome deve ter pelo menos 2 caracteres.');
+                return;
+            }
+
+            // Simular busca
+            performSearch(searchData);
+        }
+
+        async function performSearch(searchData) {
+            const submitBtn = searchForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+
+            // Desabilitar botão e mostrar loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Buscando...';
+
+            try {
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Simular resultados (em produção, seria uma requisição real)
+                // const mockResults = generateMockResults(searchData);
+                const params = new URLSearchParams(searchData);
+                const url = "/home/falecidos"
+                const response = await fetch(`${url}?${params.toString()}`,{
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                })
+                if (!response.ok) {
+                    throw new Error(`Erro na requisição: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+
+                displaySearchResults(result,searchData);
+
+            } catch (error) {
+                console.error('Erro na busca:', error);
+                showSearchError('Erro ao realizar a busca. Tente novamente.');
+            } finally {
+                // Reabilitar botão
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        }
+
+        function generateMockResults(searchData) {
+            // Em produção, isso seria substituído por uma requisição real ao backend
+            const mockDatabase = [
+                {
+                    name: 'João Silva Santos',
+                    birth_date: '1945-03-15',
+                    death_date: '2020-08-22',
+                    location: 'jardim-paz',
+                    location_name: 'Jardim da Paz',
+                    plot: 'Quadra A, Lote 15'
+                },
+                {
+                    name: 'Maria Oliveira Costa',
+                    birth_date: '1952-11-08',
+                    death_date: '2019-05-14',
+                    location: 'jardim-esperanca',
+                    location_name: 'Jardim da Esperança',
+                    plot: 'Quadra B, Lote 32'
+                },
+                {
+                    name: 'José Santos Silva',
+                    birth_date: '1938-07-20',
+                    death_date: '2021-12-03',
+                    location: 'jardim-eternidade',
+                    location_name: 'Jardim da Eternidade',
+                    plot: 'Quadra C, Lote 8'
+                }
+            ];
+
+            // Filtrar resultados baseado na busca
+            return mockDatabase.filter(person => {
+                const nameMatch = person.name.toLowerCase().includes(searchData.name.toLowerCase());
+                const birthMatch = !searchData.birth_date || person.birth_date === searchData.birth_date;
+                const deathMatch = !searchData.death_date || person.death_date === searchData.death_date;
+                const locationMatch = !searchData.location || person.location === searchData.location;
+
+                return nameMatch && birthMatch && deathMatch && locationMatch;
+            });
+        }
+
+        function displaySearchResults(results, searchData) {
+            clearSearchResults();
+
+            const resultsContainer = createResultsContainer();
+
+            if (results.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>Nenhum registro encontrado</h3>
+                        <p>Não foram encontrados registros com os critérios informados.</p>
+                        <p>Verifique os dados e tente novamente ou entre em contato conosco.</p>
+                    </div>
+                `;
+            } else {
+                resultsContainer.innerHTML = `
+                    <div class="results-header">
+                        <h3>Resultados da Busca</h3>
+                        <p>Encontrado${results.length > 1 ? 's' : ''} ${results.length} registro${results.length > 1 ? 's' : ''}</p>
+                    </div>
+                    <div class="results-list">
+                        ${results.map(person => createPersonCard(person)).join('')}
+                    </div>
+                `;
+            }
+
+            // Scroll suave para os resultados
+            resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function createResultsContainer() {
+            let container = document.getElementById('search-results');
+
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'search-results';
+                container.className = 'search-results';
+
+                const searchSection = document.getElementById('search');
+                searchSection.appendChild(container);
+            }
+
+            return container;
+        }
+
+        function createPersonCard(person) {
+            console.log(person.id)
+            return `
+                <div class="person-card">
+                    <div class="person-header">
+                        <h4 class="person-name">${person.nomeCompleto}</h4>
+                        <div class="person-dates">
+                            <span class="birth-date">
+                                <i class="fas fa-birthday-cake"></i>
+                                ${person.dataNascimento}
+                            </span>
+                            <span class="death-date">
+                                <i class="fas fa-cross"></i>
+                                ${person.dataFalecimento}
+                            </span>
+                        </div>
+                    </div>
+                    <!----<div class="person-details">
+                        <div class="person-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${person.location_name} - ${person.plot}</span>
+                        </div>
+                    </div>
+                    <div class="person-actions">
+                        <button class="btn-info" onclick="showPersonDetails('${person.name}')">
+                            <i class="fas fa-info-circle"></i>
+                            Mais Informações
+                        </button>
+                    </div>---->
+                </div>
+            `;
+        }
+
+        function clearSearchResults() {
+            const container = document.getElementById('search-results');
+            if (container) {
+                container.remove();
+            }
+            clearSearchMessages();
+        }
+
+        function showSearchError(message) {
+            clearSearchMessages();
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'search-message error';
+            errorDiv.innerHTML = `
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>${message}</span>
+            `;
+
+            searchForm.appendChild(errorDiv);
+
+            // Remove a mensagem após 5 segundos
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 5000);
+        }
+
+        function showSearchInfo(message) {
+            clearSearchMessages();
+            const infoDiv = document.createElement('div');
+            infoDiv.className = 'search-message info';
+            infoDiv.innerHTML = `
+                <i class="fas fa-info-circle"></i>
+                <span>${message}</span>
+            `;
+
+            searchForm.appendChild(infoDiv);
+
+            // Remove a mensagem após 3 segundos
+            setTimeout(() => {
+                infoDiv.remove();
+            }, 3000);
+        }
+
+        function clearSearchMessages() {
+            const messages = searchForm.querySelectorAll('.search-message');
+            messages.forEach(msg => msg.remove());
+        }
+    });
+</script>
+{% endblock %}
