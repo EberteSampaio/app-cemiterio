@@ -99,19 +99,21 @@
                 </div>
 
                 <div class="search-content">
-                    <form class="search-form" id="search-form" >
+
+                    <form class="search-form" id="search-form"
+                          method="GET" action="{{ path('app_home') }}#search">
                         <div class="form-grid">
                             <div class="form-group">
                                 <label for="search-name">Nome Completo</label>
                                 <input
                                     type="text"
                                     id="search-name"
-                                    name="nome_completo"
+                                    name="full_name"
                                     placeholder="Digite o nome completo"
                                     required
+                                    value="{{ app.request.query.get('full_name') }}"
                                 >
                             </div>
-
                         </div>
 
                         <div class="form-actions">
@@ -123,22 +125,51 @@
                     </form>
 
                     <div class="search-info">
-                        <div class="info-card">
-                            <i class="fas fa-info-circle"></i>
-                            <div class="info-content">
-                                <h4>Como usar a consulta</h4>
-                                <p>Preencha pelo menos o nome completo para realizar a busca. Os demais campos são opcionais e ajudam a refinar os resultados.</p>
-                            </div>
-                        </div>
-
-                        <div class="info-card">
-                            <i class="fas fa-phone"></i>
-                            <div class="info-content">
-                                <h4>Precisa de ajuda?</h4>
-                                <p>Entre em contato conosco pelo telefone <strong>(11) 3456-7890</strong> ou visite nossa administração.</p>
-                            </div>
-                        </div>
                     </div>
+
+                    {% if deceasedList is defined %}
+                    <div class="search-results" id="search-results">
+                    {% if deceasedList is not empty %}
+                    <div class="results-header">
+                        <h3>Resultados da Busca</h3>
+                        <p>
+                            Encontrado{{ deceasedList|length > 1 ? 's' : '' }}
+                            {{ deceasedList|length }}
+                            registro{{ deceasedList|length > 1 ? 's' : '' }}
+                        </p>
+                    </div>
+                    <div>
+                        {% for deceased in deceasedList %}
+                            <div class="person-card m-5">
+                                <div class="person-header">
+                                    <h4 class="person-name">{{ deceased.name }}</h4>
+                                    <div class="person-dates">
+                                        <span class="death-date">
+                                            <i class="fas fa-cross"></i>
+                                            {{ deceased.dateOfdeath|date('d/m/Y') }}
+                                        </span>
+                                        <span class="death-date">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                            Localidade: {{ deceased.localType }}
+                                            Quadra {{ deceased.localBlock }},
+                                            Bloco {{ deceased.localBlock }},
+                                            Número {{ deceased.localBlock }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>Nenhum registro encontrado</h3>
+                        <p>Não foram encontrados registros com os critérios informados.</p>
+                        <p>Verifique os dados e tente novamente ou entre em contato conosco.</p>
+                    </div>
+                    {% endif %}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </section>
@@ -262,7 +293,7 @@
         function handleSearchSubmit() {
             const formData = new FormData(searchForm);
             const searchData = {
-                nome_completo: formData.get('nome_completo')?.trim(),
+                nome_completo: formData.get('full_name')?.trim(),
             };
 
             // Validação básica
@@ -294,7 +325,7 @@
                 // Simular resultados (em produção, seria uma requisição real)
                 // const mockResults = generateMockResults(searchData);
                 const params = new URLSearchParams(searchData);
-                const url = "/home/falecidos"
+                const url = {{ path('app_home') }};
                 const response = await fetch(`${url}?${params.toString()}`,{
                     method: 'GET',
                     headers: {
