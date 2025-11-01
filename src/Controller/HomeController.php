@@ -21,11 +21,13 @@ final class HomeController extends AbstractController
     public function index(Request $request): Response
     {
        if($request->query->has('full_name')){
+           $deceasedList = $this->deceasedService->filter(
+               FilterDeceasedRequest::fromRequest($request)
+           );
+//           dd($deceasedList);
            return $this->render(
                'externo/home/index.html.twig',[
-                   'deceasedList' => $this->deceasedService->filter(
-                       FilterDeceasedRequest::fromRequest($request)
-                   )
+                   'deceasedList' => $deceasedList
                ]
            );
        }

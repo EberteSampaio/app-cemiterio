@@ -28,12 +28,12 @@ class Deceased
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Locker $locker = null;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?DateTime $date_of_death = null;
+
     public function __construct(
         #[ORM\Column(length: 255)]
-        private string $name,
-
-        #[ORM\Column(type: Types::DATE_MUTABLE)]
-        private DateTime $date_of_death
+        private string $name
     )
     {
         $this->created_at = new DateTime('now',Timezone::AMERICA_SP->value);
@@ -54,6 +54,10 @@ class Deceased
     {
         return $this->local->getType()->label();
     }
+    public function getLocalNumber()
+    {
+        return $this->local->getNumber();
+    }
 
     public function setName(string $name): static
     {
@@ -62,7 +66,7 @@ class Deceased
         return $this;
     }
 
-    public function getDateOfDeath(): DateTime
+    public function getDateOfDeath(): ?DateTime
     {
         return $this->date_of_death;
     }
@@ -130,5 +134,10 @@ class Deceased
         $this->updated_at = $updated_at;
 
         return $this;
+    }
+
+    public function lockerIsNull(): bool
+    {
+        return is_null($this->locker);
     }
 }

@@ -21,7 +21,7 @@ class BurialLocation
 
     #[ORM\Column]
     private ?int $section = null;
-    #[ORM\Column]
+    #[ORM\Column(nullable: true )]
     private ?int $number = null;
 
     /**

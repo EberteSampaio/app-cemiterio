@@ -144,16 +144,19 @@
                                 <div class="person-header">
                                     <h4 class="person-name">{{ deceased.name }}</h4>
                                     <div class="person-dates">
+                                        {% if  deceased.dateOfdeath is not null%}
                                         <span class="death-date">
                                             <i class="fas fa-cross"></i>
                                             {{ deceased.dateOfdeath|date('d/m/Y') }}
                                         </span>
+                                        {%endif %}
                                         <span class="death-date">
                                             <i class="fa-solid fa-location-dot"></i>
-                                            Localidade: {{ deceased.localType }}
-                                            Quadra {{ deceased.localBlock }},
-                                            Bloco {{ deceased.localBlock }},
-                                            Número {{ deceased.localBlock }}
+                                            Localidade: {{ deceased.localType }}, Quadra {{ deceased.localSection }}, Bloco {{ deceased.localBlock }}
+                                            ,Número {{ deceased.localNumber }}
+                                            {% if not deceased.lockerIsNull%}
+                                                ,Gaveta {{ deceased.lockerNumber }}
+                                            {% endif %}
                                         </span>
                                     </div>
                                 </div>
