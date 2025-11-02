@@ -152,8 +152,16 @@
                                         {%endif %}
                                         <span class="death-date">
                                             <i class="fa-solid fa-location-dot"></i>
-                                            Quadra {{ deceased.localSection }}, Bloco {{ deceased.localBlock }}
-                                            ,Número {{ deceased.localNumber }}
+                                            {% if deceased.localSection != 0 %}
+                                                Quadra {{ deceased.localSection }},
+                                            {% endif %}
+                                            {% if deceased.localBlock != 0 %}
+                                                Bloco {{ deceased.localBlock }}
+                                            {% endif %}
+                                            {% if deceased.localNumber != 0 %}
+                                                Número {{ deceased.localNumber }}
+                                            {% endif %}
+
                                             {% if not deceased.lockerIsNull%}
                                                 ,Gaveta {{ deceased.lockerNumber }}
                                             {% endif %}
