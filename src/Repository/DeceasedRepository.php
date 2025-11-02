@@ -49,10 +49,9 @@ class DeceasedRepository extends ServiceEntityRepository
         $queryBuilder->leftJoin('deceased.locker','locker');
 
         $queryBuilder->select('deceased', 'local', 'locker');
-
         if(! is_null($filter->fullName)){
-            $queryBuilder->andWhere("deceased.name LIKE :full_name")
-                ->setParameter('full_name', '%' . strtoupper($filter->fullName ). '%');
+            $queryBuilder->andWhere("LOWER(deceased.name) LIKE :full_name")
+                ->setParameter('full_name', '%' . strtolower(str_replace(" ", "%", $filter->fullName)). '%');
         }
         if(! is_null($filter->dateOfDeath)){
             $queryBuilder->andWhere("deceased.date_of_death  = :date_of_death")

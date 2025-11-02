@@ -16,8 +16,6 @@ class DeceasedService
 
     public function filter(FilterDeceasedRequest $filter)
     {
-
-        $filteredListOfDeceased = $this->deceasedRepository->findAllByFilter($filter);
-        return $filteredListOfDeceased;
+        return $this->deceasedRepository->findAllByFilter($filter);
     }
 }

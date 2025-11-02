@@ -24,7 +24,6 @@ final class HomeController extends AbstractController
            $deceasedList = $this->deceasedService->filter(
                FilterDeceasedRequest::fromRequest($request)
            );
-//           dd($deceasedList);
            return $this->render(
                'externo/home/index.html.twig',[
                    'deceasedList' => $deceasedList
