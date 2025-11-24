@@ -150,22 +150,49 @@
                                             {{ deceased.dateOfdeath|date('d/m/Y') }}
                                         </span>
                                         {%endif %}
-                                        <span class="death-date">
+                                        {% if deceased.localType == 'Jazigo' %}
+                                            <span class="death-date">
+                                                <i class="fa-solid fa-location-dot"></i>
+
+                                                {% if deceased.localNumber != 0 %}
+                                                    Jazigo {{ deceased.localNumber }}
+                                                {% endif %}
+                                                {% if deceased.localSection != 0 %}
+                                                    Quadra {{ deceased.localSection }}
+                                                {% endif %}
+                                                {% if deceased.localBlock != 0 %}
+                                                    Bloco {{ deceased.localBlock }}
+                                                {% endif %}
+                                                {% if not deceased.lockerIsNull%}
+                                                    Gaveta {{ deceased.lockerNumber }}
+                                                {% endif %}
+                                            </span>
+                                        {% elseif deceased.localType == 'Ossuário Adulto' or deceased.localType == 'Ossuário Infantil'  %}
+                                            <span class="death-date">
+                                                <i class="fa-solid fa-location-dot"></i>
+                                                {{ deceased.localType }}
+                                                {% if not deceased.lockerIsNull%}
+                                                    - Box {{ deceased.lockerNumber }}
+                                                {% endif %}
+                                            </span>
+                                        {% else %}
+                                            <span class="death-date">
                                             <i class="fa-solid fa-location-dot"></i>
                                             {% if deceased.localSection != 0 %}
-                                                Quadra {{ deceased.localSection }},
+                                                Quadra {{ deceased.localSection }}
                                             {% endif %}
-                                            {% if deceased.localBlock != 0 %}
-                                                Bloco {{ deceased.localBlock }}
-                                            {% endif %}
-                                            {% if deceased.localNumber != 0 %}
-                                                Número {{ deceased.localNumber }}
-                                            {% endif %}
+                                                {% if deceased.localBlock != 0 %}
+                                                    Bloco {{ deceased.localBlock }}
+                                                {% endif %}
+                                                {% if deceased.localNumber != 0 %}
+                                                    Número {{ deceased.localNumber }}
+                                                {% endif %}
 
-                                            {% if not deceased.lockerIsNull%}
-                                                ,Gaveta {{ deceased.lockerNumber }}
-                                            {% endif %}
+                                                {% if not deceased.lockerIsNull%}
+                                                    Gaveta {{ deceased.lockerNumber }}
+                                                {% endif %}
                                         </span>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
