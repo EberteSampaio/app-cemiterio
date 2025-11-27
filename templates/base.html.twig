@@ -459,6 +459,93 @@
                     color: var(--text-primary);
                     margin-bottom: 0.5rem;
                 }
+                /* --- Estilos do Dropdown de Admin --- */
+
+                .dropdown {
+                    position: relative;
+                }
+
+                .dropdown-menu {
+                    display: none; /* Escondido por padrão */
+                    position: absolute;
+                    top: 100%;
+                    right: 0;
+                    background: var(--bg-card); /* Fundo escuro do card */
+                    min-width: 220px;
+                    box-shadow: 0 10px 30px var(--shadow-dark);
+                    border: 1px solid var(--border-color);
+                    border-top: 3px solid var(--accent-gold); /* Detalhe dourado no topo */
+                    border-radius: 0 0 8px 8px;
+                    padding: 0.5rem 0;
+                    z-index: 1100;
+                    list-style: none;
+                    animation: fadeInUp 0.3s ease;
+                }
+
+                /* Mostra o menu quando passa o mouse no pai (.dropdown) */
+                .dropdown:hover .dropdown-menu {
+                    display: block;
+                }
+
+                /* Links do Dropdown */
+                .dropdown-item {
+                    display: block;
+                    padding: 0.8rem 1.5rem;
+                    color: var(--text-secondary);
+                    text-decoration: none;
+                    transition: var(--transition-fast);
+                    font-size: 0.95rem;
+                    border-left: 2px solid transparent;
+                }
+
+                .dropdown-item:hover {
+                    background: rgba(212, 175, 55, 0.1); /* Fundo dourado bem suave */
+                    color: var(--accent-gold);
+                    border-left-color: var(--accent-gold);
+                    padding-left: 2rem; /* Efeito de deslizar para a direita */
+                }
+
+                /* Divisor (linha horizontal) */
+                .dropdown-divider {
+                    height: 1px;
+                    background: var(--border-color);
+                    margin: 0.5rem 0;
+                }
+
+                /* Seta indicativa */
+                .dropdown-toggle i {
+                    margin-left: 5px;
+                    font-size: 0.8rem;
+                    transition: transform 0.3s;
+                }
+
+                .dropdown:hover .dropdown-toggle i {
+                    transform: rotate(180deg);
+                }
+
+                /* Ajuste Mobile: Dropdown estático para não quebrar layout */
+                @media (max-width: 768px) {
+                    .dropdown-menu {
+                        position: static;
+                        background: transparent;
+                        box-shadow: none;
+                        border: none;
+                        border-left: 1px solid var(--border-color);
+                        margin-left: 1rem;
+                        padding-left: 0;
+                        display: none; /* Ainda escondido até clicar/hover */
+                        animation: none;
+                    }
+
+                    .dropdown:hover .dropdown-menu {
+                        display: block;
+                    }
+
+                    .dropdown-item {
+                        padding: 0.5rem 1rem;
+                        font-size: 0.9rem;
+                    }
+                }
 
                 .feature-content p {
                     color: var(--text-muted);
@@ -1131,12 +1218,51 @@
                         <a href="#contact" class="nav-link">Contato</a>
                     </li>
                     {% if app.user %}
-                        <li class="nav-item">
-                            <a href="" class="nav-link">Sair</a>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle">
+                                <i class="fas fa-user-shield"></i> Admin <i class="fas fa-chevron-down"></i>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li style="padding: 0.5rem 1.5rem; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                                    Gerenciamento
+                                </li>
+
+                                <li>
+                                    <a href="{{ path('app_deceased_index') }}" class="dropdown-item">
+                                        <i class="fas fa-cross" style="width: 20px;"></i> Falecidos
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('app_burial_location_index') }}" class="dropdown-item">
+                                        <i class="fas fa-map-marker-alt" style="width: 20px;"></i> Locais
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('app_locker_index') }}" class="dropdown-item">
+                                        <i class="fas fa-box" style="width: 20px;"></i> Gavetas
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('app_register') }}" class="dropdown-item">
+                                        <i class="fas fa-plus" style="width: 20px;"></i> Novo Usuário
+                                    </a>
+                                </li>
+
+                                <li class="dropdown-divider"></li>
+
+                                <li>
+                                    <a href="{{ path('app_logout') }}" class="dropdown-item" style="color: var(--error-color);">
+                                        <i class="fas fa-sign-out-alt" style="width: 20px;"></i> Sair
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a href="{{ path('app_login') }}" class="nav-link">Área do administrador </a>
+                            <a href="{{ path('app_login') }}" class="nav-link">
+                                <i class="fas fa-lock"></i> Área Restrita
+                            </a>
                         </li>
                     {% endif %}
                 </ul>

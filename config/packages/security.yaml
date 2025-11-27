@@ -22,6 +22,10 @@ security:
                 check_path: app_login
                 default_target_path: app_deceased_index
 
+            logout:
+                path: app_logout
+                target: app_login
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -31,8 +35,18 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # 1. Login deve ser público, senão ninguém entra
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+
+        # 2. Regras ESPECÍFICAS (Protegidas) vêm PRIMEIRO
+        - { path: ^/locker, roles: ROLE_USER }
+        - { path: ^/burial, roles: ROLE_USER }
+        - { path: ^/deceased, roles: ROLE_USER }
+        - { path: ^/register, roles: ROLE_USER }
+
+        # 3. Regras GENÉRICAS (Públicas) vêm por ÚLTIMO
+        # Use ^/$ para garantir que é EXATAMENTE a home page, e não "tudo que tem barra"
+        - { path: ^/$, roles: PUBLIC_ACCESS }
 
 when@test:
     security:
