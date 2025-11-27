@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('app_burial_location_delete', {'id': burial_location.id}) }}" onsubmit="return confirm('Tem certeza que deseja excluir este local? Essa ação não pode ser desfeita.');" style="display: inline-block;">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ burial_location.id) }}">
+    <button class="btn-delete">
+        <i class="fas fa-trash"></i> Excluir
+    </button>
+</form>

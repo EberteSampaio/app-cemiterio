@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalhes - Memorial Jardim São Pedro{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .details-card {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.35);
+            color: #fff;
+            max-width: 700px;
+            margin: 0 auto;
+            margin-top: 40px;
+        }
+
+        .details-title {
+            text-align: center;
+            color: #f5d7a1;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .styled-details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+
+        .styled-details-table th {
+            background: #4d3b1f;
+            color: #f5d7a1;
+            padding: 14px;
+            text-align: left;
+            width: 40%;
+            font-weight: 600;
+        }
+
+        .styled-details-table td {
+            padding: 14px;
+            background: #222;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .actions-wrapper {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+
+        .btn-action {
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: .25s ease;
+            border: none;
+        }
+
+        .btn-back {
+            background: #293241;
+            color: #fff;
+        }
+
+        .btn-back:hover {
+            background: #3a4a5c;
+        }
+
+        .btn-edit {
+            background: #927339;
+            color: #fff;
+        }
+
+        .btn-edit:hover {
+            background: #b8914b;
+        }
+
+        .delete-form-wrapper form {
+            display: inline-block;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <main class="main">
+        <section class="about section">
+
+            <div class="details-card">
+
+                <h2 class="details-title">Detalhes do Registro</h2>
+
+                <table class="styled-details-table">
+                    <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <td>{{ deceased.id }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Criado em</th>
+                        <td>{{ deceased.createdAt ? deceased.createdAt|date('d/m/Y H:i') : '-' }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Atualizado em</th>
+                        <td>{{ deceased.updatedAt ? deceased.updatedAt|date('d/m/Y H:i') : '-' }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Falecimento</th>
+                        <td>{{ deceased.dateOfDeath ? deceased.dateOfDeath|date('d/m/Y') : '-' }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Nome</th>
+                        <td>{{ deceased.name }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="actions-wrapper">
+
+                    <a href="{{ path('app_deceased_index') }}" class="btn-action btn-back">
+                        Voltar
+                    </a>
+
+                    <a href="{{ path('app_deceased_edit', {'id': deceased.id}) }}" class="btn-action btn-edit">
+                        Editar
+                    </a>
+
+                    <span class="delete-form-wrapper">
+                    {{ include('deceased/_delete_form.html.twig') }}
+                </span>
+
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+{% endblock %}

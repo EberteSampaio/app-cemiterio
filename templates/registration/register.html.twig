@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registar - Memorial Jardim São Pedro{% endblock %}
+
+{% block body %}
+    <main class="main">
+        <section class="about section" id="about">
+            <div class="container">
+
+                <div class="section-header">
+                    <h2 class="section-title">Registrar novo usuário</h2>
+                </div>
+
+                {{ form_start(registrationForm, {'attr': {'class': 'search-form'}}) }}
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        {{ form_label(registrationForm.email) }}
+                        {{ form_widget(registrationForm.email, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(registrationForm.email) }}
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        {{ form_label(registrationForm.plainPassword) }}
+                        {{ form_widget(registrationForm.plainPassword, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(registrationForm.plainPassword) }}
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn primary">Registrar</button>
+                </div>
+
+                {{ form_end(registrationForm) }}
+            </div>
+        </section>
+    </main>
+{% endblock %}

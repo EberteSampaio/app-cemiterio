@@ -36,9 +36,11 @@ class BurialLocation
     #[ORM\OneToMany(targetEntity: Locker::class, mappedBy: 'local')]
     private Collection $lockers;
 
+    #[ORM\Column(enumType: TypeBurialLocal::class)]
+    private TypeBurialLocal $type;
+
     public function __construct(
-        #[ORM\Column(enumType: TypeBurialLocal::class)]
-        private TypeBurialLocal $type
+
     )
     {
         $this->deceaseds = new ArrayCollection();

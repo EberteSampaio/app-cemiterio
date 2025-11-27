@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalhes do Local{% endblock %}
+
+{% block body %}
+    <main class="main section">
+        <div class="container">
+
+            <div class="details-card">
+                <div class="details-header">
+                    <h1>Local #{{ burial_location.id }}</h1>
+                    <span style="color: var(--accent-gold); font-weight: 600;">
+                        {{ burial_location.type.label() }}
+                    </span>
+                </div>
+
+                <table class="details-table">
+                    <tbody>
+                    <tr>
+                        <th>Bloco</th>
+                        <td>{{ burial_location.block }}</td>
+                    </tr>
+                    <tr>
+                        <th>Seção / Quadra</th>
+                        <td>{{ burial_location.section }}</td>
+                    </tr>
+                    <tr>
+                        <th>Número</th>
+                        <td>{{ burial_location.number }}</td>
+                    </tr>
+                    {# Exemplo: Se você quiser mostrar quantos falecidos estão aqui #}
+                    {# <tr>
+                            <th>Ocupação</th>
+                            <td>{{ burial_location.deceaseds|length }} falecidos</td>
+                        </tr> #}
+                    </tbody>
+                </table>
+
+                <div style="padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2);">
+                    <a href="{{ path('app_burial_location_index') }}" class="btn-back">
+                        <i class="fas fa-arrow-left"></i> Voltar para a lista
+                    </a>
+
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <a href="{{ path('app_burial_location_edit', {'id': burial_location.id}) }}" class="btn-create">
+                            <i class="fas fa-pen"></i> Editar
+                        </a>
+                        {{ include('burial_location/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+{% endblock %}

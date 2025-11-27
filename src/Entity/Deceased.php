@@ -31,13 +31,36 @@ class Deceased
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?DateTime $date_of_death = null;
 
+    #[ORM\Column(length: 255)]
+    private string $name;
     public function __construct(
-        #[ORM\Column(length: 255)]
-        private string $name
     )
     {
-        $this->created_at = new DateTime('now',Timezone::AMERICA_SP->value);
-        $this->updated_at = new DateTime('now',Timezone::AMERICA_SP->value);
+        $this->created_at = new DateTime('now');
+        $this->updated_at = new DateTime('now');
+    }
+
+    public function getLocal(): ?BurialLocation
+    {
+        return $this->local;
+    }
+
+    public function setLocal(?BurialLocation $local): self
+    {
+        $this->local = $local;
+        return $this;
+    }
+
+// ADD
+    public function getLocker(): ?Locker
+    {
+        return $this->locker;
+    }
+
+    public function setLocker(?Locker $locker): self
+    {
+        $this->locker = $locker;
+        return $this;
     }
 
     public function getId(): ?int
@@ -75,26 +98,6 @@ class Deceased
     {
         $this->date_of_death = $date_of_death;
 
-        return $this;
-    }
-
-    /**
-     * @param BurialLocation|null $local
-     * @return Deceased
-     */
-    public function setLocal(?BurialLocation $local): Deceased
-    {
-        $this->local = $local;
-        return $this;
-    }
-
-    /**
-     * @param Locker|null $locker
-     * @return Deceased
-     */
-    public function setLocker(?Locker $locker): Deceased
-    {
-        $this->locker = $locker;
         return $this;
     }
 

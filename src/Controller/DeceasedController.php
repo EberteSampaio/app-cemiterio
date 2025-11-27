@@ -1,18 +1,98 @@
 <?php
 
-namespace App\Controller;
+    namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+    use App\Entity\Deceased;
+    use App\Form\Deceased1Type;
+    use App\Form\DeceasedType;
+    use App\Repository\DeceasedRepository;
+    use Doctrine\ORM\EntityManagerInterface;
+    use Knp\Component\Pager\PaginatorInterface;
+    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\Routing\Attribute\Route;
 
-final class DeceasedController extends AbstractController
-{
-    #[Route('/deceased', name: 'app_deceased')]
-    public function index(): Response
+    #[Route('/deceased')]
+    final class DeceasedController extends AbstractController
     {
-        return $this->render('deceased/index.html.twig', [
-            'controller_name' => 'DeceasedController',
-        ]);
+        #[Route(name: 'app_deceased_index', methods: ['GET'])]
+        public function index(
+            DeceasedRepository $deceasedRepository,
+            Request $request,
+            PaginatorInterface $paginator
+        ): Response
+        {
+            $query = $deceasedRepository->createQueryBuilder('d')
+                ->orderBy('d.created_at', 'DESC')
+                ->getQuery();
+
+            $deceaseds = $paginator->paginate(
+                $query,
+                $request->query->getInt('page', 1),
+                10 // quantidade por página
+            );
+
+            return $this->render('deceased/index.html.twig', [
+                'deceaseds' => $deceaseds,
+            ]);
+        }
+
+
+        #[Route('/new', name: 'app_deceased_new', methods: ['GET', 'POST'])]
+        public function new(Request $request, EntityManagerInterface $entityManager): Response
+        {
+            $deceased = new Deceased();
+            $form = $this->createForm(DeceasedType::class, $deceased);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($deceased);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_deceased_index', [], Response::HTTP_SEE_OTHER);
+            }
+
+            return $this->render('deceased/new.html.twig', [
+                'deceased' => $deceased,
+                'form' => $form,
+            ]);
+        }
+
+        #[Route('/{id}', name: 'app_deceased_show', methods: ['GET'])]
+        public function show(Deceased $deceased): Response
+        {
+            return $this->render('deceased/show.html.twig', [
+                'deceased' => $deceased,
+            ]);
+        }
+
+        #[Route('/{id}/edit', name: 'app_deceased_edit', methods: ['GET', 'POST'])]
+        public function edit(Request $request, Deceased $deceased, EntityManagerInterface $entityManager): Response
+        {
+            $form = $this->createForm(DeceasedType::class, $deceased);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_deceased_index', [], Response::HTTP_SEE_OTHER);
+            }
+
+            return $this->render('deceased/edit.html.twig', [
+                'deceased' => $deceased,
+                'form' => $form,
+            ]);
+        }
+
+        #[Route('/{id}', name: 'app_deceased_delete', methods: ['POST'])]
+        public function delete(Request $request, Deceased $deceased, EntityManagerInterface $entityManager): Response
+        {
+            if ($this->isCsrfTokenValid('delete'.$deceased->getId(), $request->getPayload()->getString('_token'))) {
+                $entityManager->remove($deceased);
+                $entityManager->flush();
+            }
+
+            return $this->redirectToRoute('app_deceased_index', [], Response::HTTP_SEE_OTHER);
+        }
     }
-}

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Deceased{% endblock %}
+
+{% block body %}
+   <main class="main">
+
+       <section class="about section">
+           <div class="section-header">
+               <h1 class="section-title">Registrar Falecido</h1>
+               <p class="section-subtitle">Informe os dados do falecido no formulário.</p>
+           </div>
+           <div class="form-card">
+               {{ include('deceased/_form.html.twig') }}
+           </div>
+
+           <div class="actions">
+               <a href="{{ path('app_deceased_index') }}" class="btn btn-secondary">
+                   Voltar à Lista
+               </a>
+           </div>
+       </section>
+   </main>
+{% endblock %}

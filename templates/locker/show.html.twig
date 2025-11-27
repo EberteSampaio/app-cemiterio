@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalhes da Gaveta{% endblock %}
+
+{% block body %}
+    <main class="main section">
+        <div class="container">
+            <div class="details-card">
+                <div class="details-header">
+                    <h1>Gaveta #{{ locker.id }}</h1>
+                    <span style="color: var(--accent-gold); font-weight: 600; font-size: 1.2rem;">
+                        <i class="fas fa-box"></i> Nº {{ locker.number }}
+                    </span>
+                </div>
+
+                <table class="details-table">
+                    <tbody>
+                    <tr>
+                        <th>Número de Identificação</th>
+                        <td>{{ locker.number }}</td>
+                    </tr>
+                    <tr>
+                        <th>Local Vinculado</th>
+                        <td>
+                            {% if locker.local %}
+                                <strong style="color: var(--accent-gold);">{{ locker.local.type.label() }}</strong><br>
+                                Bloco: {{ locker.local.block }} | Seção: {{ locker.local.section }} | Nº: {{ locker.local.number }}
+                            {% else %}
+                                <span style="color: var(--text-muted);">Sem vínculo</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div style="padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2);">
+                    <a href="{{ path('app_locker_index') }}" class="btn-back">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </a>
+
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <a href="{{ path('app_locker_edit', {'id': locker.id}) }}" class="btn-create" style="background: transparent; border: 1px solid var(--accent-gold); color: var(--accent-gold);">
+                            <i class="fas fa-pen"></i> Editar
+                        </a>
+                        {{ include('locker/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

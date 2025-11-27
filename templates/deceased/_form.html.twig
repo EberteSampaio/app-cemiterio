@@ -1,0 +1,127 @@
+<style>
+    /* Escopo do formulário para não quebrar o resto do site */
+    .deceased-form-container {
+        /* Baseado no estilo .search-form do seu template */
+        max-width: 600px;
+        margin: 4rem auto; /* Centralizado vertical/horizontal */
+        background: var(--bg-card, rgba(26, 26, 26, 0.9));
+        padding: 3rem;
+        border-radius: 16px;
+        border: 1px solid var(--border-color, #404040);
+        box-shadow: 0 20px 40px var(--shadow-dark, rgba(0,0,0,0.5));
+        font-family: 'Inter', sans-serif;
+        color: var(--text-primary, #fff);
+
+        /* Animação de entrada suave */
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Título do formulário */
+    .deceased-form-container h3 {
+        font-family: 'Playfair Display', serif;
+        color: var(--accent-gold, #d4af37);
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid var(--border-color, #404040);
+        padding-bottom: 1rem;
+    }
+
+    /* Labels */
+    .deceased-form-container label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--text-secondary, #e0e0e0);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 0.9rem;
+    }
+
+    /* Inputs de Texto, Data e Selects */
+    .deceased-form-container input[type="text"],
+    .deceased-form-container input[type="date"],
+    .deceased-form-container select {
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+
+        /* Cores do tema Dark */
+        background-color: var(--bg-input, rgba(45, 45, 45, 0.8));
+        border: 2px solid var(--border-color, #404040);
+        color: var(--text-primary, #fff);
+
+        border-radius: 8px;
+        font-size: 1rem;
+        font-family: 'Inter', sans-serif;
+        transition: all 0.3s ease;
+
+        /* Garante que o calendário do input date fique escuro */
+        color-scheme: dark;
+    }
+
+    /* Placeholder (texto de ajuda dentro do input) */
+    .deceased-form-container ::placeholder {
+        color: var(--text-muted, #a0a0a0);
+        font-style: italic;
+    }
+
+    /* Estado de Foco (quando clica) */
+    .deceased-form-container input:focus,
+    .deceased-form-container select:focus {
+        outline: none;
+        border-color: var(--accent-gold, #d4af37);
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+        background-color: rgba(26, 26, 26, 1);
+    }
+
+    /* Botão de Salvar */
+    .form-actions {
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    .deceased-form-container .btn-save {
+        /* Estilo .btn-primary do template */
+        background: linear-gradient(135deg, var(--accent-gold, #d4af37), var(--accent-gold-dark, #b8941f));
+        color: var(--primary-dark, #0a0a0a);
+
+        border: none;
+        padding: 1rem 3rem;
+        font-size: 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        width: 100%; /* Botão largura total em mobile */
+    }
+
+    .deceased-form-container .btn-save:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px var(--shadow-gold, rgba(212, 175, 55, 0.3));
+        background: linear-gradient(135deg, var(--accent-gold-light, #e6c659), var(--accent-gold, #d4af37));
+    }
+
+    /* Responsividade */
+    @media (min-width: 768px) {
+        .deceased-form-container .btn-save {
+            width: auto; /* Botão tamanho normal em desktop */
+            min-width: 200px;
+        }
+    }
+</style>
+<div class="deceased-form-container">
+    {{ form_start(form) }}
+    {# Renderiza os erros globais, se houver #}
+    {{ form_errors(form) }}
+
+    {# O form_widget renderiza label + input + erros de cada campo #}
+    {{ form_widget(form) }}
+
+    <div class="form-actions">
+        <button type="submit" class="btn-save">{{ button_label|default('Salvar') }}</button>
+    </div>
+    {{ form_end(form) }}
+</div>

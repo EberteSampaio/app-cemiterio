@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Lista de Falecidos - Memorial{% endblock %}
+{% block title %}Locais de Sepultamento{% endblock %}
 
 {% block stylesheets %}
     <style>
-        /* Container principal estilo Card (igual ao Search Form) */
+        /* --- CSS IDÊNTICO AO DE FALECIDOS --- */
+
+        /* Container principal estilo Card */
         .listing-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -15,7 +17,7 @@
             animation: fadeInUp 0.6s ease-out;
         }
 
-        /* Cabeçalho da Listagem com Botão Criar */
+        /* Cabeçalho da Listagem */
         .listing-header {
             display: flex;
             justify-content: space-between;
@@ -37,7 +39,7 @@
             font-size: 0.95rem;
         }
 
-        /* Botão Novo (Estilo Dourado) */
+        /* Botão Novo */
         .btn-create {
             background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
             color: var(--primary-dark);
@@ -58,18 +60,18 @@
             background: linear-gradient(135deg, var(--accent-gold-light), var(--accent-gold));
         }
 
-        /* Container responsivo da tabela */
+        /* Tabela Responsiva */
         .table-responsive {
             overflow-x: auto;
             border-radius: 8px;
         }
 
-        /* Tabela Estilizada */
+        /* Estilo da Tabela */
         .styled-table {
             width: 100%;
-            border-collapse: separate; /* Necessário para border-radius no hover */
-            border-spacing: 0 0.5rem; /* Espaço entre linhas */
-            min-width: 800px; /* Garante layout em mobile */
+            border-collapse: separate;
+            border-spacing: 0 0.5rem;
+            min-width: 800px;
         }
 
         .styled-table thead th {
@@ -90,7 +92,7 @@
         }
 
         .styled-table tbody tr:hover {
-            background-color: rgba(212, 175, 55, 0.05); /* Dourado bem suave */
+            background-color: rgba(212, 175, 55, 0.05);
             transform: scale(1.005);
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
@@ -103,7 +105,6 @@
             border-bottom: 1px solid transparent;
         }
 
-        /* Arredondar cantos das linhas */
         .styled-table tbody tr td:first-child {
             border-top-left-radius: 8px;
             border-bottom-left-radius: 8px;
@@ -113,18 +114,17 @@
             border-bottom-right-radius: 8px;
         }
 
-        /* Destaque para o nome */
+        /* Classes utilitárias para as células */
         .cell-name {
             color: var(--text-primary) !important;
             font-weight: 600;
             font-size: 1.1rem;
         }
 
-        /* Datas menores */
         .cell-date {
             color: var(--text-muted);
             font-size: 0.9rem;
-            font-family: monospace; /* Alinha números */
+            font-family: monospace;
         }
 
         /* Botões de Ação (Ícones) */
@@ -152,47 +152,12 @@
             background: rgba(212, 175, 55, 0.1);
         }
 
-        /* Paginação Customizada para Dark Mode */
-        .pagination-wrapper {
-            margin-top: 2rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        .pagination {
-            display: flex;
-            list-style: none;
-            gap: 0.5rem;
-        }
-
-        .pagination span,
-        .pagination a {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: var(--transition-fast);
-        }
-
-        .pagination a:hover {
-            border-color: var(--accent-gold);
-            color: var(--accent-gold);
-        }
-
-        .pagination .current {
-            background: var(--accent-gold);
-            color: var(--primary-dark);
-            border-color: var(--accent-gold);
-            font-weight: bold;
-        }
-
+        /* Mensagem de vazio */
         .no-records {
             text-align: center;
             padding: 3rem;
             color: var(--text-muted);
         }
-
         .no-records i {
             font-size: 3rem;
             color: var(--border-color);
@@ -209,11 +174,11 @@
             <div class="listing-card">
                 <div class="listing-header">
                     <div class="listing-title">
-                        <h2>Falecidos Cadastrados</h2>
-                        <p>Gerenciamento completo dos registros do memorial</p>
+                        <h2>Locais de Sepultamento</h2>
+                        <p>Gerenciamento de jazigos, gavetas e ossários</p>
                     </div>
-                    <a href="{{ path('app_deceased_new') }}" class="btn-create">
-                        <i class="fas fa-plus"></i> Novo Registro
+                    <a href="{{ path('app_burial_location_new') }}" class="btn-create">
+                        <i class="fas fa-plus"></i> Novo Local
                     </a>
                 </div>
 
@@ -222,34 +187,31 @@
                         <thead>
                         <tr>
                             <th width="5%">ID</th>
-                            <th>Nome do Falecido</th>
-                            <th>Data Falecimento</th>
-                            <th>Cadastrado em</th>
+                            <th>Tipo</th>
+                            <th>Bloco</th>
+                            <th>Seção</th>
+                            <th>Número</th>
                             <th>Ações</th>
                         </tr>
                         </thead>
-
                         <tbody>
-                        {% for deceased in deceaseds %}
+                        {% for burial_location in burial_locations %}
                             <tr>
-                                <td class="cell-date">#{{ deceased.id }}</td>
-                                <td class="cell-name">{{ deceased.name }}</td>
-                                <td class="cell-date">
-                                    {% if deceased.dateOfDeath %}
-                                        <i class="fas fa-cross" style="font-size: 0.8em; margin-right:5px;"></i>
-                                        {{ deceased.dateOfDeath|date('d/m/Y') }}
-                                    {% else %}
-                                        -
-                                    {% endif %}
+                                <td class="cell-date">#{{ burial_location.id }}</td>
+                                <td class="cell-name">
+                                    <i class="fas fa-map-marker-alt" style="color: var(--accent-gold); margin-right: 5px;"></i>
+                                    {# Assumindo que seu Enum tem método label() #}
+                                    {{ burial_location.type.label() }}
                                 </td>
-                                <td class="cell-date">{{ deceased.createdAt ? deceased.createdAt|date('d/m/Y H:i') : '-' }}</td>
-
+                                <td>{{ burial_location.block }}</td>
+                                <td>{{ burial_location.section }}</td>
+                                <td style="font-weight: bold; color: var(--accent-gold);">{{ burial_location.number }}</td>
                                 <td>
                                     <div class="actions-group">
-                                        <a href="{{ path('app_deceased_show', {'id': deceased.id}) }}" class="btn-icon" title="Ver detalhes">
+                                        <a href="{{ path('app_burial_location_show', {'id': burial_location.id}) }}" class="btn-icon" title="Ver detalhes">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="{{ path('app_deceased_edit', {'id': deceased.id}) }}" class="btn-icon" title="Editar">
+                                        <a href="{{ path('app_burial_location_edit', {'id': burial_location.id}) }}" class="btn-icon" title="Editar">
                                             <i class="fas fa-pen"></i>
                                         </a>
                                     </div>
@@ -257,21 +219,16 @@
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan="5" class="no-records">
-                                    <i class="fas fa-folder-open"></i>
-                                    Nenhum registro encontrado no sistema.
+                                <td colspan="6" class="no-records">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                    Nenhum local cadastrado no sistema.
                                 </td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
                 </div>
-
-                <div class="pagination-wrapper">
-                    {{ knp_pagination_render(deceaseds) }}
-                </div>
             </div>
-
         </div>
     </main>
 {% endblock %}

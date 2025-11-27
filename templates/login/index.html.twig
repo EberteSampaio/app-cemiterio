@@ -1,0 +1,43 @@
+{# templates/login/index.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %} Memorial Jardim São Pedro - Login{% endblock %}
+
+{% block body %}
+<main class="main">
+    <section class="about section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Realizar Login</h2>
+                <p class="section-subtitle">Informe o e-mail e a senha para entrar.</p>
+            </div>
+
+            {% if error %}
+                <div style="color: white; background: #d61313; padding: 10px; border-radius: 10px;">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <form action="{{ path('app_login') }}" method="post" class="search-form" id="search-form">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="username">Email:</label>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" required>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="password">Senha:</label>
+                        <input type="password" id="password" name="_password" required>
+                    </div>
+                </div>
+
+                {# If you want to control the URL the user is redirected to on success
+                <input type="hidden" name="_target_path" value="/account"> #}
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-sign-in"></i>login
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+{% endblock %}

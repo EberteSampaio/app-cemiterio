@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('app_locker_delete', {'id': locker.id}) }}" onsubmit="return confirm('Tem certeza que deseja excluir esta gaveta?');" style="display: inline-block;">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ locker.id) }}">
+    <button class="btn-delete">
+        <i class="fas fa-trash"></i> Excluir
+    </button>
+</form>

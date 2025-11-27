@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar Local{% endblock %}
+
+{% block body %}
+    <main class="main section">
+        <div class="container">
+
+            <div class="admin-card">
+                <h1>Editar Local</h1>
+
+                {{ include('burial_location/_form.html.twig', {'button_label': 'Atualizar Registro'}) }}
+
+                <div style="margin-top: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                    <a href="{{ path('app_burial_location_index') }}" class="btn-back">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </a>
+
+                    {{ include('burial_location/_delete_form.html.twig') }}
+                </div>
+            </div>
+
+        </div>
+    </main>
+{% endblock %}

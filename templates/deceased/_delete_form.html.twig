@@ -1,0 +1,22 @@
+<style>
+    .btn-delete-mini {
+        background: #8a1f1f;
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: 0.25s ease;
+    }
+
+    .btn-delete-mini:hover {
+        background: #b22a2a;
+    }
+</style>
+<form method="post"
+      action="{{ path('app_deceased_delete', {'id': deceased.id}) }}"
+      onsubmit="return confirm('Tem certeza que deseja excluir este item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ deceased.id) }}">
+    <button class="btn-delete-mini">Excluir</button>
+</form>

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20251101160425 extends AbstractMigration
+final class Version20251124131853 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,16 +20,14 @@ final class Version20251101160425 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        // GOOD
-        $this->addSql('ALTER TABLE  burial_location DROP CONSTRAINT IF EXISTS burial_location_unique_key');
-        $this->addSql('ALTER TABLE deceased ALTER date_of_death DROP NOT NULL');
+        $this->addSql('CREATE TABLE "user" (id SERIAL NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_IDENTIFIER_EMAIL ON "user" (email)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('ALTER TABLE deceased ALTER date_of_death SET NOT NULL');
-        $this->addSql('CREATE UNIQUE INDEX burial_location_unique_key ON burial_location (block, section, type, number)');
+        $this->addSql('DROP TABLE "user"');
     }
 }

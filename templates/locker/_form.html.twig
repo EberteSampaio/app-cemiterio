@@ -1,0 +1,9 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+
+<div class="form-actions" style="margin-top: 2rem; text-align: right;">
+    <button class="btn-create" style="border:none; cursor:pointer;">
+        <i class="fas fa-save"></i> {{ button_label|default('Salvar Gaveta') }}
+    </button>
+</div>
+{{ form_end(form) }}
