@@ -17,7 +17,7 @@ final class HomeController extends AbstractController
     {
     }
 
-    #[Route('/home', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function index(Request $request): Response
     {
        if($request->query->has('full_name')){
